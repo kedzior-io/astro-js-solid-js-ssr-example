@@ -1,1 +1,1 @@
-# astro-js-solid-js-ssr-example
+# A simple example of a "job board" using AstroJS + SolidJs + SSR
