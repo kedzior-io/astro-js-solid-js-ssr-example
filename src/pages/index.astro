@@ -1,0 +1,37 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav";
+import Search from "../components/Search";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+const response = await fetch("https://randomuser.me/api/?results=50");
+const data = await response.json();
+const randomUsers = data.results;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <Search client:load />
+      <section>
+        <div class="info">Just a random list of emails fetched from https://randomuser.me API. Click any link for dynamic routing. View source of the page to see the content.</div>
+        <ul>
+          {
+            randomUsers.map((user: any) => (
+              <li>
+                <a href={"jobs/" + user.email}>{user.email}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <Footer />
+    </main>
+  </body>
+</html>
